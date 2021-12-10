@@ -7,16 +7,15 @@ const ContactList = ({ contacts, onRemoveContact }) => (
     {contacts.map(contact => (
       <li className={s.TaskList_item} key={contact.id}>
         {contact.name + ':' + contact.number}
-        {
-          <button
-            className={s.TaskList_button}
-            type="button"
-            name="delte"
-            onClick={() => onRemoveContact(contact.id)}
-          >
-            delete
-          </button>
-        }
+
+        <button
+          className={s.TaskList_button}
+          type="button"
+          name="delete"
+          onClick={() => onRemoveContact(contact.id)}
+        >
+          delete
+        </button>
       </li>
     ))}
   </ul>

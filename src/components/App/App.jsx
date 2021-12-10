@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import ContactList from './ContactList';
-import Filter from './Filter';
-import ContactForm from './ContactForm';
+import ContactList from '../ContactList';
+import Filter from '../Filter';
+import ContactForm from '../ContactForm';
 
 export default class App extends Component {
   state = {
@@ -36,8 +36,10 @@ export default class App extends Component {
     }
   };
 
-  changeFilter = filter => {
-    this.setState({ filter });
+  changeFilter = e => {
+    e.preventDefault();
+
+    this.setState({ filter: e.target.value });
   };
 
   getVisibleContacts = () => {
@@ -60,6 +62,7 @@ export default class App extends Component {
     const { filter } = this.state;
 
     const visibleContacts = this.getVisibleContacts();
+    const isVisibleFilter = this.state.contacts.length > 1;
 
     return (
       <div>
@@ -67,7 +70,7 @@ export default class App extends Component {
 
         <ContactForm onAddContact={this.addContact} />
         <h2>Contacts</h2>
-        {visibleContacts.length > 1 && (
+        {isVisibleFilter && (
           <Filter value={filter} onChangeFilter={this.changeFilter} />
         )}
         {visibleContacts.length > 0 && (
